@@ -1,0 +1,12 @@
+:root {
+  --main-color: rgb(255, 255, 255); 
+  --accent-color: rgb(143, 14, 143);
+}
+body{
+  background-color: var(--main-color);
+}
+h1{
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 10vh;
+}
