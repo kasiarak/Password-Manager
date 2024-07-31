@@ -1,6 +1,6 @@
-.LoginForm{
+.registrationForm{
     width: 300px;
-    height: 450px;
+    height: 500px;
     border: 0.2px solid lightgray;
     border-radius: 15px;
     text-align: center;
@@ -8,32 +8,32 @@
     margin-right: auto;
     box-shadow: 0 0 15px gray;
 }
-.LoginForm h2{
-    margin-top: 15px;
+.registrationForm h2{
+    margin-top: 23px;
 }
-.LoginForm hr{
+.registrationForm hr{
     width: 80%;
 }
-.loginInputs{
+.registrationInputs{
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 15px;
 }
-.loginInputs input{
+.registrationInputs input{
     border: none;
     font-size: 1.2rem;
     width: 180px;
 }
-.loginInputs img{
+.registrationInputs img{
     height: 30px;
     margin-right: 10px;
     margin-top: -1px;
 }
-.loginInputs input:focus{
+.registrationInputs input:focus{
     outline: none;
 }
 .buttons{
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .buttons button{
     background-color: var(--main-color);
@@ -50,10 +50,13 @@
     border: 1px solid var(--accent-color);
 }
 .buttons h3{
-    margin-top: 30px;
+    margin-top: 40px;
     margin-bottom: 5px;
 }
 .message{
     color: red; 
     height: 10px;
+}
+#emailIcon{
+    width: 25px;
 }
