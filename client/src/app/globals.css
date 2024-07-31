@@ -1,9 +1,11 @@
 :root {
   --main-color: rgb(255, 255, 255); 
-  --accent-color: rgb(143, 14, 143);
+  --accent-color: rgb(106, 5, 106);
+  --secondary-color: black; 
 }
 body{
   background-color: var(--main-color);
+  color: var(--secondary-color);
 }
 h1{
   text-align: center;

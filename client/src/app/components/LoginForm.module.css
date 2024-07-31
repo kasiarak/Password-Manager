@@ -1,0 +1,59 @@
+.LoginForm{
+    width: 300px;
+    height: 450px;
+    border: 0.2px solid lightgray;
+    border-radius: 15px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 15px gray;
+}
+.LoginForm h2{
+    margin-top: 30px;
+}
+.LoginForm hr{
+    width: 80%;
+}
+.loginInputs{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+.loginInputs input{
+    border: none;
+    font-size: 1.2rem;
+    width: 180px;
+}
+.loginInputs img{
+    height: 30px;
+    margin-right: 10px;
+    margin-top: -1px;
+}
+.loginInputs input:focus{
+    outline: none;
+}
+.buttons{
+    margin-top: 20px;
+}
+.buttons button{
+    background-color: var(--main-color);
+    border: 1px solid gray;
+    border-radius: 15px;
+    width: 80%;
+    height: 45px;
+    cursor: pointer;
+}
+.buttons button:hover{
+    background-color: var(--accent-color);
+    color: var(--main-color); 
+    transition: 0.3s;
+    border: 1px solid var(--accent-color);
+}
+.buttons h3{
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+.message{
+    color: red; 
+    height: 10px;
+}
