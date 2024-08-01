@@ -2,7 +2,7 @@ import { Poppins } from 'next/font/google';
 import styles from './RegistrationForm.module.css'
 const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
-function RegistrationForm(){
+function RegistrationForm({ setIsUserRegistered }){
     return(
         <div className={styles.registrationForm}>
         <h2>Registration</h2>
@@ -30,7 +30,7 @@ function RegistrationForm(){
             <button className={poppins.className}>Create Account</button>
             <p className={styles.message}></p>
             <h3>Already have an account?</h3>
-            <button className={poppins.className}>Sing in</button>
+            <button  onClick={() => setIsUserRegistered(true)} className={poppins.className}>Sing in</button>
         </div>
     </div>
     );

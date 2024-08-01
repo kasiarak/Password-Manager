@@ -2,7 +2,7 @@ import { Poppins } from 'next/font/google';
 import styles from './LoginForm.module.css';
 const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
-function LoginForm(){
+function LoginForm({ setIsUserRegistered }){
     return(
         <div className={styles.LoginForm}>
             <h2>Login</h2>
@@ -20,7 +20,7 @@ function LoginForm(){
                 <button className={poppins.className} >Login</button>
                 <p className={styles.message}></p>
                 <h3>Don't have an account?</h3>
-                <button className={poppins.className} >Sing up</button>
+                <button onClick={() => setIsUserRegistered(false)} className={poppins.className} >Sing up</button>
             </div>
         </div>
     );
