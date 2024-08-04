@@ -3,7 +3,7 @@ import styles from './RegistrationForm.module.css'
 import { useState } from 'react';
 const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
-function RegistrationForm({ setIsUserRegistered }){
+function RegistrationForm({ setIsUserRegistered, setIsUserLoggedIn}){
     const [username, setUsername] = useState(""); 
     const handleUsername = (event) => setUsername(event.target.value);
     const [email, setEmail] = useState(""); 
@@ -34,7 +34,12 @@ function RegistrationForm({ setIsUserRegistered }){
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json(); 
-            setMessage(data.message);
+            if(data.message===null){
+                setIsUserLoggedIn(true);
+                setIsUserRegistered(true)
+            }else{
+                setMessage(data.message);
+            }     
         } catch (error) {
             setMessage('Registration failed. Please try again later.');
         }

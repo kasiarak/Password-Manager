@@ -1,0 +1,14 @@
+.dashboard{
+    width: 80vw;
+    height: 70vh;
+    border: 0.2px solid lightgray;
+    border-radius: 15px;
+    box-shadow: 0 0 15px gray;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media screen and (max-width: 600px){
+    .dashboard{
+        width: 90vw;
+    }
+}

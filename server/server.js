@@ -53,7 +53,7 @@ const registration = (req, res) => {
             res.end(); 
             return;
         }
-        res.write(JSON.stringify({message: ''}));
+        res.write(JSON.stringify({message: null}));
         res.end(); 
     })
 }
