@@ -17,20 +17,27 @@ const registration = (req, res) => {
     req.on('end', async () =>{
         const parsedBody = JSON.parse(body);
         const { username, email, password, confirmedPassword } = parsedBody;
-        const [users] = await pool.query('SELECT * FROM users');
-        const userUsername = users.find((user) => user.username === parsedBody.username)
-        const userEmail = users.find((user) => user.email === parsedBody.email);
-        if(parsedBody.username==="" || parsedBody.email==="" 
-            || parsedBody.password==="" || parsedBody.confirmedPassword===""){
+        if(parsedBody.username==="" || parsedBody.email === "" 
+            || parsedBody.password === "" || parsedBody.confirmedPassword === ""){
+            res.writeHead(400, { 'Content-Type': 'application/json' });
             res.write(JSON.stringify({message: 'All fields must be complete'}));
             res.end();  
             return;  
-        }else if(userUsername){
+        }
+        const [users] = await pool.query('SELECT * FROM users');
+        const userUsername = users.find((user) => user.username === parsedBody.username)
+        const userEmail = users.find((user) => user.email === parsedBody.email);
+        if(userUsername){
+            res.writeHead(409, { 'Content-Type': 'application/json' });
             res.write(JSON.stringify({message: 'Username already exists'}));
             res.end(); 
-        }else if(userEmail){
+            return;
+        }
+        if(userEmail){
+            res.writeHead(409, { 'Content-Type': 'application/json' });
             res.write(JSON.stringify({message: 'Email already exists'}));
             res.end(); 
+            return; 
         }
     })
 }
