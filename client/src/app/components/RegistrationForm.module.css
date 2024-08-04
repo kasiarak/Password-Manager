@@ -50,15 +50,18 @@
     border: 1px solid var(--accent-color);
 }
 .buttons h3{
-    margin-top: 40px;
+    margin-top: -10px;
     margin-bottom: 5px;
 }
 .message{
     color: red; 
-    height: 10px;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     margin-left: 5px;
     margin-right: 5px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #emailIcon{
     width: 25px;
