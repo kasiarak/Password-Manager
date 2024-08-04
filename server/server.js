@@ -42,6 +42,11 @@ const registration = (req, res) => {
             res.end(); 
             return; 
         }
+        if(parsedBody.password !== parsedBody.confirmedPassword){
+            res.write(JSON.stringify({message: 'Password and confirmation password do not match. Please ensure both passwords are identical.'}));
+            res.end(); 
+            return;
+        }
         res.write(JSON.stringify({message: ''}));
         res.end(); 
     })
