@@ -54,6 +54,7 @@ const registration = (req, res) => {
             return;
         }
         res.write(JSON.stringify({message: null}));
+        pool.query('INSERT INTO users (id, username, email, password) VALUES (id, ?, ?, ?)',[parsedBody.username, parsedBody.email, parsedBody.password])
         res.end(); 
     })
 }
