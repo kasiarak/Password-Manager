@@ -47,6 +47,12 @@ const registration = (req, res) => {
             res.end(); 
             return;
         }
+        const passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$";
+        if(!parsedBody.password.match(passwordPattern)){
+            res.write(JSON.stringify({message: 'Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long.'}));
+            res.end(); 
+            return;
+        }
         res.write(JSON.stringify({message: ''}));
         res.end(); 
     })
