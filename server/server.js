@@ -19,7 +19,6 @@ const registration = (req, res) => {
         const { username, email, password, confirmedPassword } = parsedBody;
         if(parsedBody.username==="" || parsedBody.email === "" 
             || parsedBody.password === "" || parsedBody.confirmedPassword === ""){
-            res.writeHead(400, { 'Content-Type': 'application/json' });
             res.write(JSON.stringify({message: 'All fields must be complete'}));
             res.end();  
             return;  
@@ -28,22 +27,27 @@ const registration = (req, res) => {
         const userUsername = users.find((user) => user.username === parsedBody.username)
         const userEmail = users.find((user) => user.email === parsedBody.email);
         if(userUsername){
-            res.writeHead(409, { 'Content-Type': 'application/json' });
             res.write(JSON.stringify({message: 'Username already exists'}));
             res.end(); 
             return;
         }
         if(userEmail){
-            res.writeHead(409, { 'Content-Type': 'application/json' });
             res.write(JSON.stringify({message: 'Email already exists'}));
             res.end(); 
             return; 
         }
+        const emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
+        if(!parsedBody.email.match(emailPattern)){
+            res.write(JSON.stringify({message: 'The email address is not valid. Please enter a valid email address.'}));
+            res.end(); 
+            return; 
+        }
+        res.write(JSON.stringify({message: ''}));
+        res.end(); 
     })
 }
 const notFoundHandler = (req,res) => {
-    res.statusCode = 404;
-    res.write(JSON.stringify({message: 'Route not foundee'}));
+    res.write(JSON.stringify({message: 'Route not found'}));
     res.end();
 }
 

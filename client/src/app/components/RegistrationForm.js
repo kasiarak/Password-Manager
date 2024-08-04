@@ -36,7 +36,6 @@ function RegistrationForm({ setIsUserRegistered }){
             const data = await response.json(); 
             setMessage(data.message);
         } catch (error) {
-            console.error(error);
             setMessage('Registration failed. Please try again later.');
         }
     }
@@ -51,7 +50,7 @@ function RegistrationForm({ setIsUserRegistered }){
         <hr></hr>
         <div className={styles.registrationInputs}>
             <img id={styles.emailIcon} src='email-svgrepo-com.svg'/>
-            <input value={email} onChange={handleEmail} type="email" className={poppins.className} placeholder='Email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></input>
+            <input value={email} onChange={handleEmail} type="email" className={poppins.className} placeholder='Email'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>
