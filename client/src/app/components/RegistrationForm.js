@@ -36,7 +36,9 @@ function RegistrationForm({ setIsUserRegistered, setIsUserLoggedIn}){
             const data = await response.json(); 
             if(data.message===null){
                 setIsUserLoggedIn(true);
-                setIsUserRegistered(true)
+                setIsUserRegistered(true);
+                localStorage.setItem('username', username);
+                localStorage.setItem('isUserLoggedIn', 'true'); 
             }else{
                 setMessage(data.message);
             }     

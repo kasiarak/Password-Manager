@@ -1,6 +1,6 @@
 import { Poppins } from 'next/font/google';
 import styles from './LoginForm.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
 function LoginForm({ setIsUserRegistered, setIsUserLoggedIn}){
@@ -28,6 +28,8 @@ function LoginForm({ setIsUserRegistered, setIsUserLoggedIn}){
             }
             const data = await response.json();
             if(data.message===null){
+                localStorage.setItem('username', username);
+                localStorage.setItem('isUserLoggedIn', 'true'); 
                 setIsUserLoggedIn(true);
             }else{
                 setMessage(data.message);
@@ -37,6 +39,11 @@ function LoginForm({ setIsUserRegistered, setIsUserLoggedIn}){
         }
     } 
 
+    useEffect(() => {
+        const loggedIn = localStorage.getItem('isUserLoggedIn') === 'true';
+        setIsUserLoggedIn(loggedIn);
+      }, []);
+    
     return(
         <div className={styles.LoginForm}>
             <h2>Login</h2>
