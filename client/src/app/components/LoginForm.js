@@ -1,24 +1,58 @@
 import { Poppins } from 'next/font/google';
 import styles from './LoginForm.module.css';
+import { useState } from 'react';
 const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
-function LoginForm({ setIsUserRegistered }){
+function LoginForm({ setIsUserRegistered, setIsUserLoggedIn}){
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const handleUsername = (event) => setUsername(event.target.value);
+    const handlePassword = (event) => setPassword(event.target.value);
+    const [message, setMessage] = useState('');
+
+    async function login(){
+        const body = {
+            username: username,
+            password: password,
+        }
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/login',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            if(data.message===null){
+                setIsUserLoggedIn(true);
+            }else{
+                setMessage(data.message);
+            } 
+        }catch(error){
+            setMessage('Login failed. Please try again later.');
+        }
+    } 
+
     return(
         <div className={styles.LoginForm}>
             <h2>Login</h2>
             <div className={styles.loginInputs}>
                 <img src='person-svgrepo-com.svg'/>
-                <input className={poppins.className} placeholder='Username'></input>
+                <input value={username} onChange={handleUsername} className={poppins.className} placeholder='Username'></input>
             </div>
             <hr></hr>
             <div className={styles.loginInputs}>
                 <img src='lock-svgrepo-com.svg'/>
-                <input type="password" className={poppins.className} placeholder='Password'></input>
+                <input value={password} onChange={handlePassword} type="password" className={poppins.className} placeholder='Password'></input>
             </div>
             <hr></hr>
             <div className={styles.buttons}>
-                <button className={poppins.className} >Login</button>
-                <p className={styles.message}></p>
+                <button onClick={login} className={poppins.className} >Login</button>
+                <p className={styles.message}>{message}</p>
                 <h3>Don't have an account?</h3>
                 <button onClick={() => setIsUserRegistered(false)} className={poppins.className} >Sing up</button>
             </div>

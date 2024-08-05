@@ -62,6 +62,41 @@ const registration = (req, res) => {
         res.end(); 
     })
 }
+const login = (req,res) => {
+    let body = '';
+    req.on('data', (chunk) => {
+        body += chunk.toString();
+    });
+    req.on('end', async () => {
+        const parsedBody = JSON.parse(body);
+        const { username, password } = parsedBody;
+        if(parsedBody.username === "" || password === ""){
+            res.write(JSON.stringify({message: 'All fields must be complete'}));
+            res.end();  
+            return; 
+        }
+        const [users] = await pool.query('SELECT * FROM users');
+        const user = users.find((user) => user.username === username);
+        if(user){
+            const hash = crypto.createHash('sha256');
+            hash.update(password);
+            const hashedPassword = hash.digest('hex');
+            if(user.password !== hashedPassword){
+                res.write(JSON.stringify({ message: 'Password is incorrect' }));
+                res.end();
+                return;
+            }else{
+                res.write(JSON.stringify({ message: null }));
+                res.end();
+                return;
+            }
+        }else{
+            res.write(JSON.stringify({ message: 'User not found' }));
+            res.end();
+            return;
+        }
+    })
+}
 const notFoundHandler = (req,res) => {
     res.write(JSON.stringify({message: 'Route not found'}));
     res.end();
@@ -79,8 +114,10 @@ const server = createServer((req, res) =>{
     }
 
     jsonMiddleWare(req, res, () => {
-        if(req.url==='/registration' && req.method==='POST'){
+        if(req.url === '/registration' && req.method === 'POST'){
             registration(req, res);
+        }else if(req.url === '/login' && req.method === 'POST'){
+            login(req,res);
         }else{
             notFoundHandler(req,res); 
         }

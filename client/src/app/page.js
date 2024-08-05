@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
      <h1>Password Manager</h1>
-     {!isUserLoggedIn && isUserRegistered && <LoginForm  setIsUserRegistered={setIsUserRegistered}/>}
+     {!isUserLoggedIn && isUserRegistered && <LoginForm  setIsUserRegistered={setIsUserRegistered} setIsUserLoggedIn={setIsUserLoggedIn}/>}
      {!isUserLoggedIn && !isUserRegistered && <RegistrationForm setIsUserRegistered={setIsUserRegistered} setIsUserLoggedIn={setIsUserLoggedIn}/>}
      {isUserLoggedIn && isUserRegistered && <Dashboard/>}
     </main>
