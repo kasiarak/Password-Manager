@@ -1,6 +1,7 @@
 import { createServer } from 'http';
 import pool from './db.js';
 import dotenv from 'dotenv';
+import crypto from 'crypto';
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -54,7 +55,10 @@ const registration = (req, res) => {
             return;
         }
         res.write(JSON.stringify({message: null}));
-        pool.query('INSERT INTO users (id, username, email, password) VALUES (id, ?, ?, ?)',[parsedBody.username, parsedBody.email, parsedBody.password])
+        const hash = crypto.createHash('sha256');
+        hash.update(parsedBody.password);
+
+        await pool.query('INSERT INTO users (id, username, email, password) VALUES (id, ?, ?, ?)',[parsedBody.username, parsedBody.email, hash.digest('hex')])
         res.end(); 
     })
 }
