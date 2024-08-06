@@ -3,6 +3,11 @@
   --accent-color: rgb(106, 5, 106);
   --secondary-color: black; 
 }
+html{
+  max-width: 100%;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+}
 body{
   background-color: var(--main-color);
   color: var(--secondary-color);
