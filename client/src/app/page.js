@@ -39,7 +39,7 @@ export default function Home() {
      </div></div>}
      {!isUserLoggedIn && isUserRegistered && <LoginForm  setIsUserRegistered={setIsUserRegistered} setIsUserLoggedIn={setIsUserLoggedIn}/>}
      {!isUserLoggedIn && !isUserRegistered && <RegistrationForm setIsUserRegistered={setIsUserRegistered} setIsUserLoggedIn={setIsUserLoggedIn}/>}
-     {isUserLoggedIn && isUserRegistered && <Dashboard/>}
+     {isUserLoggedIn && isUserRegistered && <Dashboard username={localStorage.getItem('username')}/>}
     </main>
   );
 } 
