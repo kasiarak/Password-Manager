@@ -33,6 +33,10 @@ function Dashboard({ username }){
                     <button className={poppins.className}>Add password</button>
                 </div>
             </div>
+            <div className={styles.searchEngine}>
+                    <img src="search-svgrepo-com.svg"/>
+                    <input className={poppins.className} placeholder="Search..."/>
+                </div>
         </div>
     );
 }

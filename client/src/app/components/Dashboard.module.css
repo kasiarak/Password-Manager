@@ -107,6 +107,28 @@
 .dropdownContent :last-child{
   border-radius: 0 0 15px 15px;
 }
+.searchEngine{
+    margin-left: 15px;
+    margin-top: 7px;
+    width: 250px;
+    height: 30px;
+    border: 0.2px solid lightgray;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+  }
+  .searchEngine input{
+    width: 190px;
+    border: none;
+  }
+  .searchEngine input:focus{
+    outline: none;
+  }
+  .searchEngine img{
+    margin-right: 5px;
+    width: 22px;
+    cursor: pointer;
+  }
 @media screen and (max-width: 900px){
     .dashboard{
         width: 320px;
