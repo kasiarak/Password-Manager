@@ -116,19 +116,37 @@
     border-radius: 15px;
     display: flex;
     justify-content: center;
-  }
-  .searchEngine input{
+}
+.searchEngine input{
     width: 190px;
     border: none;
-  }
-  .searchEngine input:focus{
+}
+.searchEngine input:focus{
     outline: none;
-  }
-  .searchEngine img{
+}
+.searchEngine img{
     margin-right: 5px;
     width: 22px;
     cursor: pointer;
-  }
+}
+.passwords{
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0.2px solid lightgray;
+    border-radius: 15px;
+    width: 95%;
+    height: 330px;
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+}
+.noPasswordsFoundAlert{
+    text-align: center;
+    justify-self: center;
+    margin-top: 110px;
+    color: gray;
+}
 @media screen and (max-width: 900px){
     .dashboard{
         width: 320px;

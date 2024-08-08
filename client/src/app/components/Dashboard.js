@@ -7,6 +7,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 function Dashboard({ username }){
     const [savedPasswords, setSavedPasswords] = useState(0);
     const [filters, setFilters] = useState(['white', 'white', 'white']);
+    const [noPasswordsFoundAlertIsShown, setNoPasswordsFoundAlerstIsShown] = useState('true'); 
 
     const filterHandle = (index) => {
         const newFilters = ['white', 'white', 'white'];
@@ -33,10 +34,13 @@ function Dashboard({ username }){
                     <button className={poppins.className}>Add password</button>
                 </div>
             </div>
+            <div className={styles.passwords}>
             <div className={styles.searchEngine}>
                     <img src="search-svgrepo-com.svg"/>
                     <input className={poppins.className} placeholder="Search..."/>
-                </div>
+            </div>
+            {noPasswordsFoundAlertIsShown && <p className={styles.noPasswordsFoundAlert}>No passwords found</p>}
+            </div>
         </div>
     );
 }
