@@ -39,7 +39,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
-.buttons div{
+.savedPasswords, .filters{
     border: 0.2px solid lightgray;
     border-radius: 15px;
     width: 150px;
@@ -50,7 +50,7 @@
     margin-top: 10px;
     border: 0.2px solid lightgray;
     border-radius: 15px;
-    background-color: var(--main-color);
+    background-color: white;
     cursor: pointer;
     height: 50px;
     padding-left: 5px;
@@ -58,7 +58,7 @@
 }
 .container button:hover{
     background-color: var(--accent-color);
-    color: var(--main-color); 
+    color: white;
     transition: 0.3s;
     border: 1px solid var(--accent-color);
 }
@@ -77,6 +77,36 @@
     height: 19px;
     width: 29px;
 }
+.dropdown{
+  position: relative;
+  display: inline-block;
+}
+.dropdownContent{
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 16px 0px white;
+  z-index: 1;
+  width: 150px;
+  border: 0.2px solid lightgray;
+  border-radius: 0 0 15px 15px;
+  border-top: none;
+  margin-top: -11px;
+}
+.dropdown:hover .dropdownContent{
+  display: block;
+}
+.filter{
+  cursor: pointer;
+  padding: 12px 16px;
+}
+.filter:hover{
+   background-color: var(--accent-color);
+    transition: 0.3s;
+}
+.dropdownContent :last-child{
+  border-radius: 0 0 15px 15px;
+}
 @media screen and (max-width: 900px){
     .dashboard{
         width: 320px;
@@ -85,6 +115,6 @@
         flex-direction: column;
     }
     .container{
-        margin-left: 2px; 
+        margin-left: 2px;
     }
 }
