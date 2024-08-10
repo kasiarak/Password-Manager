@@ -30,9 +30,9 @@ function Password(){
 
     return(
         <div className={styles.password}>
-            <button><img src="trash-full-svgrepo-com.svg"></img></button>
-            <button><img src="pencil-ui-svgrepo-com.svg"></img></button>
-            <button onClick={showPassword}><img src={passwordIsShown ? "eye-off-svgrepo-com.svg" : "eye-svgrepo-com.svg"}></img></button>
+            <button><img alt="delete" src="trash-full-svgrepo-com.svg"></img></button>
+            <button><img alt="edit" src="pencil-ui-svgrepo-com.svg"></img></button>
+            <button onClick={showPassword}><img alt="show password" src={passwordIsShown ? "eye-off-svgrepo-com.svg" : "eye-svgrepo-com.svg"}></img></button>
             <div className={styles.passwordInfo}>
                 <h3>Website: {website}</h3>
                 <h3>Password: {passwordIsShown ? password : "••••••••••••••"}</h3>

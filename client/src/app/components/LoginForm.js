@@ -48,12 +48,12 @@ function LoginForm({ setIsUserRegistered, setIsUserLoggedIn}){
         <div className={styles.LoginForm}>
             <h2>Login</h2>
             <div className={styles.loginInputs}>
-                <img src='person-svgrepo-com.svg'/>
+                <img alt="username" src='person-svgrepo-com.svg'/>
                 <input value={username} onChange={handleUsername} className={poppins.className} placeholder='Username'></input>
             </div>
             <hr></hr>
             <div className={styles.loginInputs}>
-                <img src='lock-svgrepo-com.svg'/>
+                <img alt="password" src='lock-svgrepo-com.svg'/>
                 <input value={password} onChange={handlePassword} type="password" className={poppins.className} placeholder='Password'></input>
             </div>
             <hr></hr>

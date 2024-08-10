@@ -51,22 +51,22 @@ function RegistrationForm({ setIsUserRegistered, setIsUserLoggedIn}){
         <div className={styles.registrationForm}>
         <h2>Registration</h2>
         <div className={styles.registrationInputs}>
-            <img src='person-svgrepo-com.svg'/>
+            <img alt="username" src='person-svgrepo-com.svg'/>
             <input value={username} onChange={handleUsername} className={poppins.className} placeholder='Username'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>
-            <img id={styles.emailIcon} src='email-svgrepo-com.svg'/>
+            <img alt="email" id={styles.emailIcon} src='email-svgrepo-com.svg'/>
             <input value={email} onChange={handleEmail} type="email" className={poppins.className} placeholder='Email'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>
-            <img src='lock-svgrepo-com.svg'/>
+            <img alt="password" src='lock-svgrepo-com.svg'/>
             <input value={password} onChange={handlePassword} type="password" className={poppins.className} placeholder='Password'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>
-            <img src='key-svgrepo-com.svg'/>
+            <img alt="password" src='key-svgrepo-com.svg'/>
             <input value={confirmedPassword} onChange={handleConfirmedPassword} type="password" className={poppins.className} placeholder='Confirm Password'></input>
         </div>
         <hr></hr>
