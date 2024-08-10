@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import styles from './Dashboard.module.css'
 import { Poppins } from 'next/font/google';
+import Password from './Password';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
 function Dashboard({ username }){
     const [savedPasswords, setSavedPasswords] = useState(0);
     const [filters, setFilters] = useState(['white', 'white', 'white']);
-    const [noPasswordsFoundAlertIsShown, setNoPasswordsFoundAlerstIsShown] = useState('true'); 
+    const [noPasswordsFoundAlertIsShown, setNoPasswordsFoundAlerstIsShown] = useState(false); 
 
     const filterHandle = (index) => {
         const newFilters = ['white', 'white', 'white'];
@@ -40,6 +41,8 @@ function Dashboard({ username }){
                     <input className={poppins.className} placeholder="Search..."/>
             </div>
             {noPasswordsFoundAlertIsShown && <p className={styles.noPasswordsFoundAlert}>No passwords found</p>}
+            <Password/>
+            <Password/>
             </div>
         </div>
     );
