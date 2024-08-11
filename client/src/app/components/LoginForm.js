@@ -44,17 +44,23 @@ function LoginForm({ setIsUserRegistered, setIsUserLoggedIn}){
         setIsUserLoggedIn(loggedIn);
       }, []);
     
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            login();
+        }
+    };
+
     return(
         <div className={styles.LoginForm}>
             <h2>Login</h2>
             <div className={styles.loginInputs}>
                 <img alt="username" src='person-svgrepo-com.svg'/>
-                <input value={username} onChange={handleUsername} className={poppins.className} placeholder='Username'></input>
+                <input value={username} onChange={handleUsername} onKeyDown={handleKeyDown} className={poppins.className} placeholder='Username'></input>
             </div>
             <hr></hr>
             <div className={styles.loginInputs}>
                 <img alt="password" src='lock-svgrepo-com.svg'/>
-                <input value={password} onChange={handlePassword} type="password" className={poppins.className} placeholder='Password'></input>
+                <input value={password} onChange={handlePassword} onKeyDown={handleKeyDown} type="password" className={poppins.className} placeholder='Password'></input>
             </div>
             <hr></hr>
             <div className={styles.buttons}>

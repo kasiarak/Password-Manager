@@ -47,27 +47,33 @@ function RegistrationForm({ setIsUserRegistered, setIsUserLoggedIn}){
         }
     }
     
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            registration();
+        }
+    };
+
     return(
         <div className={styles.registrationForm}>
         <h2>Registration</h2>
         <div className={styles.registrationInputs}>
             <img alt="username" src='person-svgrepo-com.svg'/>
-            <input value={username} onChange={handleUsername} className={poppins.className} placeholder='Username'></input>
+            <input value={username} onChange={handleUsername} onKeyDown={handleKeyDown} className={poppins.className} laceholder='Username'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>
             <img alt="email" id={styles.emailIcon} src='email-svgrepo-com.svg'/>
-            <input value={email} onChange={handleEmail} type="email" className={poppins.className} placeholder='Email'></input>
+            <input value={email} onChange={handleEmail} onKeyDown={handleKeyDown} type="email" className={poppins.className} placeholder='Email'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>
             <img alt="password" src='lock-svgrepo-com.svg'/>
-            <input value={password} onChange={handlePassword} type="password" className={poppins.className} placeholder='Password'></input>
+            <input value={password} onChange={handlePassword} onKeyDown={handleKeyDown} type="password" className={poppins.className} placeholder='Password'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>
             <img alt="password" src='key-svgrepo-com.svg'/>
-            <input value={confirmedPassword} onChange={handleConfirmedPassword} type="password" className={poppins.className} placeholder='Confirm Password'></input>
+            <input value={confirmedPassword} onChange={handleConfirmedPassword} onKeyDown={handleKeyDown} type="password" className={poppins.className} placeholder='Confirm Password'></input>
         </div>
         <hr></hr>
         <div className={styles.buttons}>
