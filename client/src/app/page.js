@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 import LoginForm from "./components/LoginForm";
 import RegistrationForm from './components/RegistrationForm';
 import Dashboard from "./components/Dashboard";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Poppins } from 'next/font/google';
 const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
@@ -26,6 +26,14 @@ export default function Home() {
     localStorage.setItem('username', null);
     hideModal();  
   }
+
+  useEffect(() => checklogin(),[]);
+
+  function checklogin(){
+    if(localStorage.getItem('isUserLoggedIn')==='true') setIsUserLoggedIn(true); 
+  }
+
+  useMemo(checklogin, []);
 
   return (
     <main className={styles.main}>
