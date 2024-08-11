@@ -41,8 +41,7 @@ function Dashboard({ username }){
                     <input className={poppins.className} placeholder="Search..."/>
             </div>
             {noPasswordsFoundAlertIsShown && <p className={styles.noPasswordsFoundAlert}>No passwords found</p>}
-            <Password/>
-            <Password/>
+            <Password passwordId={1}/>
             </div>
         </div>
     );

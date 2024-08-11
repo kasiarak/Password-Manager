@@ -1,13 +1,49 @@
 import { useEffect, useState } from 'react';
 import styles from './Password.module.css';
 
-function Password(){
+function Password({ passwordId }){
     const [passwordIsShown, setPasswordIsShown] = useState(false);
-    const [website, setWebsite] = useState('mmmmmmmmm');
-    const [email, setEmail] = useState('mmmmmmmmmmmm');
-    const [password, setPassword] = useState('mmmmmmmmm');
-    const [lastUpdate, setLastUpdate] = useState('01-01-2024');
-    const [securityRank, setSecurityRank] = useState('Needs Improvement');
+    const [website, setWebsite] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [lastUpdate, setLastUpdate] = useState('');
+    const [securityRank, setSecurityRank] = useState('');
+
+    useEffect(() => refreshView,[]);
+
+    async function refreshView(){
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/password/' + passwordId);
+            const data = await response.json();
+            setWebsite(data[0].website);
+            setEmail(data[0].email);
+            setPassword(data[0].password);
+            const date = new Date(data[0].last_update);
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0'); 
+            const year = date.getFullYear();
+            setLastUpdate(`${day}-${month}-${year}`);
+            switch(data[0].security_rank){
+                case 0:
+                    setSecurityRank('Insecure');
+                    break;
+                case 1:
+                    setSecurityRank('Insecure');
+                    break;
+                case 2:
+                    setSecurityRank('Needs Improvement');
+                    break;
+                case 3:
+                    setSecurityRank('Secure');
+                    break;
+                case 4:
+                    setSecurityRank('Very Secure');
+                    break;                
+            }
+        }catch(error){
+            console.error(error);
+        }
+    }
 
     function showPassword(){
         setPasswordIsShown(prevState => !prevState);

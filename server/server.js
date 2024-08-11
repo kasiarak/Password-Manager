@@ -97,6 +97,14 @@ const login = (req,res) => {
         }
     })
 }
+
+const getDataPassword = async (req, res) =>{
+    const id = req.url.split('/')[2];
+    const [password] = await pool.query('SELECT * FROM passwords WHERE id = ?', [id])
+    res.write(JSON.stringify(password)); 
+    res.end();
+}
+
 const notFoundHandler = (req,res) => {
     res.write(JSON.stringify({message: 'Route not found'}));
     res.end();
@@ -118,6 +126,8 @@ const server = createServer((req, res) =>{
             registration(req, res);
         }else if(req.url === '/login' && req.method === 'POST'){
             login(req,res);
+        }else if(req.url.match( /\/password\/([0-9]+)/) && req.method === 'GET'){
+            getDataPassword(req, res);
         }else{
             notFoundHandler(req,res); 
         }
