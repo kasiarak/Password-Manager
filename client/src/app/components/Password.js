@@ -3,11 +3,11 @@ import styles from './Password.module.css';
 
 function Password(){
     const [passwordIsShown, setPasswordIsShown] = useState(false);
-    const [website, setWebsite] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [lastUpdate, setLastUpdate] = useState('');
-    const [securityRank, setSecurityRank] = useState('');
+    const [website, setWebsite] = useState('mmmmmmmmm');
+    const [email, setEmail] = useState('mmmmmmmmmmmm');
+    const [password, setPassword] = useState('mmmmmmmmm');
+    const [lastUpdate, setLastUpdate] = useState('01-01-2024');
+    const [securityRank, setSecurityRank] = useState('Needs Improvement');
 
     function showPassword(){
         setPasswordIsShown(prevState => !prevState);
@@ -30,9 +30,11 @@ function Password(){
 
     return(
         <div className={styles.password}>
+            <div className={styles.buttons}>
             <button><img alt="delete" src="trash-full-svgrepo-com.svg"></img></button>
             <button><img alt="edit" src="pencil-ui-svgrepo-com.svg"></img></button>
             <button onClick={showPassword}><img alt="show password" src={passwordIsShown ? "eye-off-svgrepo-com.svg" : "eye-svgrepo-com.svg"}></img></button>
+            </div>
             <div className={styles.passwordInfo}>
                 <h3>Website: {website}</h3>
                 <h3>Password: {passwordIsShown ? password : "••••••••••••••"}</h3>

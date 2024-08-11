@@ -150,11 +150,20 @@
 @media screen and (max-width: 900px){
     .dashboard{
         width: 320px;
+        height: 900px;
     }
     .dashboardHeader{
         flex-direction: column;
     }
     .container{
         margin-left: 2px;
+    }
+    .passwords{
+        height: 500px;
+        margin-top: 20px;
+    }
+    .searchEngine{
+        margin-left: auto;
+        margin-right: auto;
     }
 }
