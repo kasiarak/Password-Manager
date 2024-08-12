@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './Password.module.css';
+import { Poppins } from 'next/font/google';
+const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
 function Password({ passwordId }){
     const [passwordIsShown, setPasswordIsShown] = useState(false);
@@ -8,6 +10,7 @@ function Password({ passwordId }){
     const [password, setPassword] = useState('');
     const [lastUpdate, setLastUpdate] = useState('');
     const [securityRank, setSecurityRank] = useState('');
+    const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
     useEffect(() => refreshView,[]);
 
@@ -64,10 +67,24 @@ function Password({ passwordId }){
         }
       };
 
+      const deletePassword = () => {
+
+      }
+
+      function showDeleteModal(){setIsDeleteModalVisible(true);}
+      function hideDeleteModal(){setIsDeleteModalVisible(false);}
+
     return(
         <div className={styles.password}>
+            {isDeleteModalVisible && <div className={styles.deleteModalBackground}>
+                <div className={styles.deleteModal}>
+                    <button className={styles.hideDeleteModalBtn} onClick={hideDeleteModal}>&#10799;</button>
+                    <h3>Are you sure you want to delete this password?</h3>
+                    <button className={`${styles.deleteBtn} ${poppins.className}`} onClick={deletePassword}>Delete</button>
+                </div>
+            </div>}
             <div className={styles.buttons}>
-            <button><img alt="delete" src="trash-full-svgrepo-com.svg"></img></button>
+            <button onClick={showDeleteModal}><img alt="delete" src="trash-full-svgrepo-com.svg"></img></button>
             <button><img alt="edit" src="pencil-ui-svgrepo-com.svg"></img></button>
             <button onClick={showPassword}><img alt="show password" src={passwordIsShown ? "eye-off-svgrepo-com.svg" : "eye-svgrepo-com.svg"}></img></button>
             </div>

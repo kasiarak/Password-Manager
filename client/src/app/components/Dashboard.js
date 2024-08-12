@@ -42,6 +42,7 @@ function Dashboard({ username }){
             </div>
             {noPasswordsFoundAlertIsShown && <p className={styles.noPasswordsFoundAlert}>No passwords found</p>}
             <Password passwordId={1}/>
+            <Password passwordId={1}/>
             </div>
         </div>
     );
