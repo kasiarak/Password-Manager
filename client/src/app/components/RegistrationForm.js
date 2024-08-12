@@ -58,7 +58,7 @@ function RegistrationForm({ setIsUserRegistered, setIsUserLoggedIn}){
         <h2>Registration</h2>
         <div className={styles.registrationInputs}>
             <img alt="username" src='person-svgrepo-com.svg'/>
-            <input value={username} onChange={handleUsername} onKeyDown={handleKeyDown} className={poppins.className} laceholder='Username'></input>
+            <input value={username} onChange={handleUsername} onKeyDown={handleKeyDown} className={poppins.className} placeholder='Username'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>

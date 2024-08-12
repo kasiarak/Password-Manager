@@ -72,6 +72,13 @@
 .hideModalBtn:hover{
     background-color: var(--accent-color);
 }
+.loadingPage{
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 @media screen and (max-width: 600px){
     .modal{
         width: 350px;

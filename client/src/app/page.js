@@ -10,7 +10,8 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 export default function Home() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isUserRegistered, setIsUserRegistered] = useState(true);
-  const [isModalVisible, setIsModalVisible] = useState(false); 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);  
 
   function showModal(){
     setIsModalVisible(true); 
@@ -30,24 +31,30 @@ export default function Home() {
   useEffect(() => checklogin(),[]);
 
   function checklogin(){
-    if(localStorage.getItem('isUserLoggedIn')==='true') setIsUserLoggedIn(true); 
+    if(localStorage.getItem('isUserLoggedIn')==='true') {
+      setIsUserLoggedIn(true);
+      setIsLoading(false);
+    }else setIsLoading(false); 
   }
-
-  useMemo(checklogin, []);
 
   return (
     <main className={styles.main}>
      <h1>Password Manager</h1>
-     {isUserLoggedIn && isUserRegistered && <h2 onClick={showModal} className={styles.logOutBtn}>Log out</h2>}
-     {isModalVisible && <div className={styles.modalBackground}>
-     <div className={styles.modal}>
-      <button className={styles.hideModalBtn} onClick={hideModal}>&#10799;</button>
-      <h3>Are you sure you want to log out?</h3>
-      <button className={`${styles.showModalBtn} ${poppins.className}`} onClick={logOut}>Log out</button>
-     </div></div>}
-     {!isUserLoggedIn && isUserRegistered && <LoginForm  setIsUserRegistered={setIsUserRegistered} setIsUserLoggedIn={setIsUserLoggedIn}/>}
-     {!isUserLoggedIn && !isUserRegistered && <RegistrationForm setIsUserRegistered={setIsUserRegistered} setIsUserLoggedIn={setIsUserLoggedIn}/>}
-     {isUserLoggedIn && isUserRegistered && <Dashboard username={localStorage.getItem('username')}/>}
+     {isLoading && <div className={styles.loadingPage}><h2>Loading...</h2></div>}
+     {!isLoading &&
+     <div>
+          {isUserLoggedIn && isUserRegistered && <h2 onClick={showModal} className={styles.logOutBtn}>Log out</h2>}
+          {isModalVisible && <div className={styles.modalBackground}>
+          <div className={styles.modal}>
+           <button className={styles.hideModalBtn} onClick={hideModal}>&#10799;</button>
+           <h3>Are you sure you want to log out?</h3>
+           <button className={`${styles.showModalBtn} ${poppins.className}`} onClick={logOut}>Log out</button>
+          </div></div>}
+          {!isUserLoggedIn && isUserRegistered && <LoginForm  setIsUserRegistered={setIsUserRegistered} setIsUserLoggedIn={setIsUserLoggedIn}/>}
+          {!isUserLoggedIn && !isUserRegistered && <RegistrationForm setIsUserRegistered={setIsUserRegistered} setIsUserLoggedIn={setIsUserLoggedIn}/>}
+          {isUserLoggedIn && isUserRegistered && <Dashboard username={localStorage.getItem('username')}/>}
+     </div>
+     }
     </main>
   );
 } 
