@@ -11,6 +11,17 @@ function Password({ passwordId }){
     const [lastUpdate, setLastUpdate] = useState('');
     const [securityRank, setSecurityRank] = useState('');
     const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+    const [isEditModalVisible, setIsEditModalVisible] = useState(false); 
+    const [changedWebsite, setChangedWebsite] = useState(website); 
+    const [changedEmail, setChangedEmail] = useState(email); 
+    const [changedPassword, setChangedPassword] = useState(password); 
+
+    useEffect(() => setChangedWebsite(website), [website]);
+    const handleChangedWebsite = (e) => {setChangedWebsite(e.target.value)}
+    useEffect(() => setChangedEmail(email), [email]);
+    const handleChangedEmail = (e) => {setChangedEmail(e.target.value)}
+    useEffect(() => setChangedPassword(password), [password]);
+    const handleChangedPassword = (e) => {setChangedPassword(e.target.value)}
 
     useEffect(() => refreshView,[]);
 
@@ -71,21 +82,50 @@ function Password({ passwordId }){
 
       }
 
-      function showDeleteModal(){setIsDeleteModalVisible(true);}
-      function hideDeleteModal(){setIsDeleteModalVisible(false);}
+      const updatePassword = () => {
+
+      }
+
+      function showDeleteModal(){setIsDeleteModalVisible(true)}
+      function hideDeleteModal(){setIsDeleteModalVisible(false)}
+      function showEditModal(){setIsEditModalVisible(true)}
+      function hideEditModal(){
+        setIsEditModalVisible(false);
+        setChangedWebsite(website);
+        setChangedEmail(email);
+        setChangedPassword(password);
+    }
+
+    function getEditButtonClassName(){
+        if(website !== changedWebsite || email !== changedEmail || password !== changedPassword){
+            return styles.editBtn
+        }else{
+            return styles.disabledEditBtn
+        }
+    }
 
     return(
         <div className={styles.password}>
-            {isDeleteModalVisible && <div className={styles.deleteModalBackground}>
+            {isDeleteModalVisible && <div className={styles.modalBackground}>
                 <div className={styles.deleteModal}>
-                    <button className={styles.hideDeleteModalBtn} onClick={hideDeleteModal}>&#10799;</button>
+                    <button className={styles.hideModalBtn} onClick={hideDeleteModal}>&#10799;</button>
                     <h3>Are you sure you want to delete this password?</h3>
                     <button className={`${styles.deleteBtn} ${poppins.className}`} onClick={deletePassword}>Delete</button>
                 </div>
             </div>}
+            {isEditModalVisible && <div className={styles.modalBackground}>
+                <div className={styles.editModal}>
+                    <button className={styles.hideModalBtn} onClick={hideEditModal}>&#10799;</button>
+                    <h3>Make changes</h3>
+            <div className={styles.inputContainer}><input value={changedWebsite} onChange={handleChangedWebsite} placeholder='Website'></input></div>
+            <div className={styles.inputContainer}><input value={changedEmail} onChange={handleChangedEmail} placeholder='Email'></input></div>
+            <div className={styles.inputContainer}><input value={changedPassword} onChange={handleChangedPassword} placeholder='Password'></input></div>
+            <button className={`${getEditButtonClassName()} ${poppins.className}`} onClick={updatePassword}>Update</button>
+                </div>
+            </div>}
             <div className={styles.buttons}>
             <button onClick={showDeleteModal}><img alt="delete" src="trash-full-svgrepo-com.svg"></img></button>
-            <button><img alt="edit" src="pencil-ui-svgrepo-com.svg"></img></button>
+            <button onClick={showEditModal}><img alt="edit" src="pencil-ui-svgrepo-com.svg"></img></button>
             <button onClick={showPassword}><img alt="show password" src={passwordIsShown ? "eye-off-svgrepo-com.svg" : "eye-svgrepo-com.svg"}></img></button>
             </div>
             <div className={styles.passwordInfo}>
