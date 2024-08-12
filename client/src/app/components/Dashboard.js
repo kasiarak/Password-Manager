@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from './Dashboard.module.css'
 import { Poppins } from 'next/font/google';
 import Password from './Password';
@@ -9,12 +9,26 @@ function Dashboard({ username }){
     const [savedPasswords, setSavedPasswords] = useState(0);
     const [filters, setFilters] = useState(['white', 'white', 'white']);
     const [noPasswordsFoundAlertIsShown, setNoPasswordsFoundAlerstIsShown] = useState(false); 
+    const userId = useRef('');
 
     const filterHandle = (index) => {
         const newFilters = ['white', 'white', 'white'];
         newFilters[index] = filters[index] === 'white' ? 'var(--accent-color)' : 'white';
         setFilters(newFilters);
     }
+
+    useEffect(() => getUserId,[]);
+
+    async function getUserId(){
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/id/' + username);
+            const data = await response.json(); 
+            userId.current = data.id;
+        }catch(error){
+            console.error(error)
+        }
+    }
+
     return(
         <div className={styles.dashboard}>
             <div className={styles.dashboardHeader}>

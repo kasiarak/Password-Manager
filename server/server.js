@@ -105,6 +105,13 @@ const getDataPassword = async (req, res) =>{
     res.end();
 }
 
+const getUserId = async (req,res) => {
+    const username = req.url.split('/')[2];
+    const [user] = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
+    res.write(JSON.stringify({ id: user[0].id}));
+    res.end();
+}
+
 const notFoundHandler = (req,res) => {
     res.write(JSON.stringify({message: 'Route not found'}));
     res.end();
@@ -128,6 +135,8 @@ const server = createServer((req, res) =>{
             login(req,res);
         }else if(req.url.match( /\/password\/([0-9]+)/) && req.method === 'GET'){
             getDataPassword(req, res);
+        }else if(req.url.match(/\/id\/([A-Za-z0-9_\-]+)/) && req.method === 'GET'){
+            getUserId(req, res);
         }else{
             notFoundHandler(req,res); 
         }
