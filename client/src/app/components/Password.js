@@ -117,9 +117,9 @@ function Password({ passwordId }){
                 <div className={styles.editModal}>
                     <button className={styles.hideModalBtn} onClick={hideEditModal}>&#10799;</button>
                     <h3>Make changes</h3>
-            <div className={styles.inputContainer}><input value={changedWebsite} onChange={handleChangedWebsite} placeholder='Website'></input></div>
-            <div className={styles.inputContainer}><input value={changedEmail} onChange={handleChangedEmail} placeholder='Email'></input></div>
-            <div className={styles.inputContainer}><input value={changedPassword} onChange={handleChangedPassword} placeholder='Password'></input></div>
+            <div className={styles.inputContainer}><input id="website" value={changedWebsite} onChange={handleChangedWebsite} placeholder='Website'></input></div>
+            <div className={styles.inputContainer}><input id="email" value={changedEmail} onChange={handleChangedEmail} placeholder='Email'></input></div>
+            <div className={styles.inputContainer}><input id="password" value={changedPassword} onChange={handleChangedPassword} placeholder='Password'></input></div>
             <button className={`${getEditButtonClassName()} ${poppins.className}`} onClick={updatePassword}>Update</button>
                 </div>
             </div>}

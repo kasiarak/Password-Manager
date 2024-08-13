@@ -52,7 +52,7 @@ function Dashboard({ username }){
             <div className={styles.passwords}>
             <div className={styles.searchEngine}>
                     <img alt="search" src="search-svgrepo-com.svg"/>
-                    <input className={poppins.className} placeholder="Search..."/>
+                    <input id="search_engine" className={poppins.className} placeholder="Search..."/>
             </div>
             {noPasswordsFoundAlertIsShown && <p className={styles.noPasswordsFoundAlert}>No passwords found</p>}
             <Password passwordId={1}/>

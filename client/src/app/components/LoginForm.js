@@ -55,12 +55,12 @@ function LoginForm({ setIsUserRegistered, setIsUserLoggedIn}){
             <h2>Login</h2>
             <div className={styles.loginInputs}>
                 <img alt="username" src='person-svgrepo-com.svg'/>
-                <input value={username} onChange={handleUsername} onKeyDown={handleKeyDown} className={poppins.className} placeholder='Username'></input>
+                <input id="username" value={username} onChange={handleUsername} onKeyDown={handleKeyDown} className={poppins.className} placeholder='Username'></input>
             </div>
             <hr></hr>
             <div className={styles.loginInputs}>
                 <img alt="password" src='lock-svgrepo-com.svg'/>
-                <input value={password} onChange={handlePassword} onKeyDown={handleKeyDown} type="password" className={poppins.className} placeholder='Password'></input>
+                <input id="password" value={password} onChange={handlePassword} onKeyDown={handleKeyDown} type="password" className={poppins.className} placeholder='Password'></input>
             </div>
             <hr></hr>
             <div className={styles.buttons}>
