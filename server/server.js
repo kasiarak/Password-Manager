@@ -98,6 +98,13 @@ const login = (req,res) => {
     })
 }
 
+const getUserPasswords = async (req, res) =>{
+    const userId = req.url.split('/')[2];
+    const [passwords] = await pool.query('SELECT * FROM passwords WHERE user_id = ?', userId);
+    res.write(JSON.stringify(passwords));
+    res.end();
+}
+
 const getDataPassword = async (req, res) =>{
     const id = req.url.split('/')[2];
     const [password] = await pool.query('SELECT * FROM passwords WHERE id = ?', [id])
@@ -133,10 +140,12 @@ const server = createServer((req, res) =>{
             registration(req, res);
         }else if(req.url === '/login' && req.method === 'POST'){
             login(req,res);
-        }else if(req.url.match( /\/password\/([0-9]+)/) && req.method === 'GET'){
+        }else if(req.url.match(/\/password\/([0-9]+)/) && req.method === 'GET'){
             getDataPassword(req, res);
         }else if(req.url.match(/\/id\/([A-Za-z0-9_\-]+)/) && req.method === 'GET'){
             getUserId(req, res);
+        }else if(req.url.match(/\/passwords\/([0-9]+)/) && req.method === 'GET'){
+            getUserPasswords(req, res);
         }else{
             notFoundHandler(req,res); 
         }

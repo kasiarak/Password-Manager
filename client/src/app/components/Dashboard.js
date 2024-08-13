@@ -9,7 +9,8 @@ function Dashboard({ username }){
     const [savedPasswords, setSavedPasswords] = useState(0);
     const [filters, setFilters] = useState(['white', 'white', 'white']);
     const [noPasswordsFoundAlertIsShown, setNoPasswordsFoundAlerstIsShown] = useState(false); 
-    const userId = useRef('');
+    const [userId, setUserId] = useState(0);
+    const [passwords, setPasswords] = useState([]); 
 
     const filterHandle = (index) => {
         const newFilters = ['white', 'white', 'white'];
@@ -17,15 +18,43 @@ function Dashboard({ username }){
         setFilters(newFilters);
     }
 
-    useEffect(() => getUserId,[]);
+    useEffect(() => {
+        getUserId();
+    }, []);
+    
+    useEffect(() => {
+        if (userId !== 0) {
+            refreshDashboard();
+        }
+    }, [userId]);
 
     async function getUserId(){
         try{
             const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/id/' + username);
             const data = await response.json(); 
-            userId.current = data.id;
+            setUserId(data.id);
         }catch(error){
             console.error(error)
+        }
+    }
+
+    async function refreshDashboard(){
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/passwords/' + userId);
+            console.log(userId.current) 
+            const data = await response.json();
+            setSavedPasswords(data.length); 
+            if(data.length === 0){
+                setNoPasswordsFoundAlerstIsShown(true);
+            }else{
+                let newPasswords = [];
+                for(let i = 0; i < data.length; i++){
+                    newPasswords.push(<Password key={data[i].id} passwordId={data[i].id}></Password>)
+                }
+                setPasswords(newPasswords); 
+            }
+        }catch(error){
+            console.error(error);
         }
     }
 
@@ -55,8 +84,7 @@ function Dashboard({ username }){
                     <input id="search_engine" className={poppins.className} placeholder="Search..."/>
             </div>
             {noPasswordsFoundAlertIsShown && <p className={styles.noPasswordsFoundAlert}>No passwords found</p>}
-            <Password passwordId={1}/>
-            <Password passwordId={2}/>
+            {passwords}
             </div>
         </div>
     );
