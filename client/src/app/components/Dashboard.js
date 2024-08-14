@@ -41,7 +41,6 @@ function Dashboard({ username }){
     async function refreshDashboard(){
         try{
             const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/passwords/' + userId);
-            console.log(userId.current) 
             const data = await response.json();
             setSavedPasswords(data.length); 
             if(data.length === 0){
@@ -49,7 +48,7 @@ function Dashboard({ username }){
             }else{
                 let newPasswords = [];
                 for(let i = 0; i < data.length; i++){
-                    newPasswords.push(<Password key={data[i].id} passwordId={data[i].id}></Password>)
+                    newPasswords.push(<Password refreshDasboard={refreshDashboard} key={data[i].id} passwordId={data[i].id}></Password>)
                 }
                 setPasswords(newPasswords); 
             }

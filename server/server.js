@@ -119,6 +119,12 @@ const getUserId = async (req,res) => {
     res.end();
 }
 
+const deletePassword = async (req, res) => {
+    const passwordId = req.url.split('/')[2];
+    await pool.query('DELETE from passwords WHERE id = ?', passwordId);
+    res.end(); 
+}
+
 const notFoundHandler = (req,res) => {
     res.write(JSON.stringify({message: 'Route not found'}));
     res.end();
@@ -146,6 +152,8 @@ const server = createServer((req, res) =>{
             getUserId(req, res);
         }else if(req.url.match(/\/passwords\/([0-9]+)/) && req.method === 'GET'){
             getUserPasswords(req, res);
+        }else if(req.url.match(/\/delete\/([0-9]+)/) && req.method === 'DELETE'){
+            deletePassword(req,res);
         }else{
             notFoundHandler(req,res); 
         }

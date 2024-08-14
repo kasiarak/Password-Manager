@@ -3,7 +3,7 @@ import styles from './Password.module.css';
 import { Poppins } from 'next/font/google';
 const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
-function Password({ passwordId }){
+function Password({ passwordId, refreshDasboard }){
     const [passwordIsShown, setPasswordIsShown] = useState(false);
     const [website, setWebsite] = useState('');
     const [email, setEmail] = useState('');
@@ -29,6 +29,16 @@ function Password({ passwordId }){
         try{
             const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/password/' + passwordId);
             const data = await response.json();
+
+            if (data.length === 0) {
+                setWebsite('');
+                setEmail('');
+                setPassword('');
+                setLastUpdate('');
+                setSecurityRank('');
+                return;
+            }
+
             setWebsite(data[0].website);
             setEmail(data[0].email);
             setPassword(data[0].password);
@@ -78,8 +88,18 @@ function Password({ passwordId }){
         }
       };
 
-      const deletePassword = () => {
-
+      const deletePassword = async () => {
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/delete/' + passwordId, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                await refreshDasboard(); 
+            }
+            hideDeleteModal(); 
+        }catch(error){
+            console.error(error);
+        }
       }
 
       const updatePassword = () => {
