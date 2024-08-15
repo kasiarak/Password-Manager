@@ -48,7 +48,7 @@ function Dashboard({ username }){
             }else{
                 let newPasswords = [];
                 for(let i = 0; i < data.length; i++){
-                    newPasswords.push(<Password refreshDasboard={refreshDashboard} key={data[i].id} passwordId={data[i].id}></Password>)
+                    newPasswords.push(<Password refreshDashboard={refreshDashboard} key={data[i].id} passwordId={data[i].id}></Password>)
                 }
                 setPasswords(newPasswords); 
             }

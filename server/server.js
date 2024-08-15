@@ -125,14 +125,36 @@ const deletePassword = async (req, res) => {
     res.end(); 
 }
 
-const notFoundHandler = (req,res) => {
+const updatePassword = async (req, res) => {
+    let body = '';
+    req.on('data', (chunk) => {
+        body += chunk.toString();
+    });
+    req.on('end', async () => {
+        const parsedBody = JSON.parse(body);
+        const passwordId = req.url.split('/')[2];
+        
+        const columns = Object.keys(parsedBody);
+        let changes = '';
+        for (let i = 0; i < columns.length; i++) {
+            changes += `${columns[i]} = ?`;
+            if (i !== columns.length - 1) changes += ', ';
+        }
+        
+        const values = Object.values(parsedBody);
+        await pool.query(`UPDATE passwords SET ${changes} WHERE id = ?`, [...values, passwordId]);
+        res.end();
+    });
+};
+
+const notFoundHandler = (res) => {
     res.write(JSON.stringify({message: 'Route not found'}));
     res.end();
 }
 
 const server = createServer((req, res) =>{
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     if (req.method === 'OPTIONS') {
@@ -154,8 +176,10 @@ const server = createServer((req, res) =>{
             getUserPasswords(req, res);
         }else if(req.url.match(/\/delete\/([0-9]+)/) && req.method === 'DELETE'){
             deletePassword(req,res);
+        }else if(req.url.match(/\/updatePassword\/([0-9]+)/) && req.method === 'PATCH'){
+            updatePassword(req,res); 
         }else{
-            notFoundHandler(req,res); 
+            notFoundHandler(res); 
         }
     });
 });

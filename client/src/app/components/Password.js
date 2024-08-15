@@ -3,7 +3,7 @@ import styles from './Password.module.css';
 import { Poppins } from 'next/font/google';
 const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
-function Password({ passwordId, refreshDasboard }){
+function Password({ passwordId, refreshDashboard }){
     const [passwordIsShown, setPasswordIsShown] = useState(false);
     const [website, setWebsite] = useState('');
     const [email, setEmail] = useState('');
@@ -88,13 +88,13 @@ function Password({ passwordId, refreshDasboard }){
         }
       };
 
-      const deletePassword = async () => {
+    const deletePassword = async () => {
         try{
             const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/delete/' + passwordId, {
                 method: 'DELETE'
             });
             if (response.ok) {
-                await refreshDasboard(); 
+                await refreshDashboard(); 
             }
             hideDeleteModal(); 
         }catch(error){
@@ -102,14 +102,53 @@ function Password({ passwordId, refreshDasboard }){
         }
       }
 
-      const updatePassword = () => {
-
+    const updatePassword = async () => {
+        const year = new Date().getFullYear();
+        const month = String(new Date().getMonth() + 1).padStart(2, '0'); 
+        const day = String(new Date().getDate()).padStart(2, '0');
+        const newLastUpdate = `${year}-${month}-${day}`;
+        const body = {};
+        if (changedWebsite !== website) {
+            body.website = changedWebsite;
+        }
+        if (changedPassword !== password) {
+            body.password = changedPassword;
+        }
+        if (changedEmail !== email) {
+            body.email = changedEmail;
+        }
+        if(lastUpdate !== newLastUpdate){
+            body.last_update = newLastUpdate;
+        }
+        if(changedPassword !== password){
+            let securityPoints = 0;
+            if(changedPassword.length >= 8) securityPoints++;
+            if(/[a-z]/.test(changedPassword) && /[A-Z]/.test(changedPassword)) securityPoints++;
+            if(/\d/.test(changedPassword)) securityPoints++;
+            if(/[!@#$%^&*(),.?":{}|<>]/.test(changedPassword)) securityPoints++;
+            body.security_rank = securityPoints; 
+        } 
+        try{
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/updatePassword/' + passwordId, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            });
+            if (response.ok) { 
+                await refreshView(); 
+                hideEditModal();
+            }
+      }catch(error){
+        console.error(error);
       }
+    }
 
-      function showDeleteModal(){setIsDeleteModalVisible(true)}
-      function hideDeleteModal(){setIsDeleteModalVisible(false)}
-      function showEditModal(){setIsEditModalVisible(true)}
-      function hideEditModal(){
+    function showDeleteModal(){setIsDeleteModalVisible(true)}
+    function hideDeleteModal(){setIsDeleteModalVisible(false)}
+    function showEditModal(){setIsEditModalVisible(true)}
+    function hideEditModal(){
         setIsEditModalVisible(false);
         setChangedWebsite(website);
         setChangedEmail(email);
