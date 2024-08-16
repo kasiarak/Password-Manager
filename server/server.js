@@ -147,6 +147,19 @@ const updatePassword = async (req, res) => {
     });
 };
 
+const addNewPassword = async (req, res) => {
+    let body = '';
+    req.on('data', (chunk) => {
+        body += chunk.toString();
+    });
+    req.on('end', async () => {
+        const parsedBody = JSON.parse(body);
+        const response = await pool.query('INSERT INTO passwords (website, password, email, last_update, security_rank, user_id) VALUES (?, ?, ?, ?, ?, ?)',
+            [parsedBody.website, parsedBody.password, parsedBody.email, parsedBody.last_update, parsedBody.security_rank, parsedBody.user_id]);
+        res.end();     
+    });
+}
+
 const notFoundHandler = (res) => {
     res.write(JSON.stringify({message: 'Route not found'}));
     res.end();
@@ -178,6 +191,8 @@ const server = createServer((req, res) =>{
             deletePassword(req,res);
         }else if(req.url.match(/\/updatePassword\/([0-9]+)/) && req.method === 'PATCH'){
             updatePassword(req,res); 
+        }else if(req.url === '/addPassword' && req.method === 'POST'){
+            addNewPassword(req,res);
         }else{
             notFoundHandler(res); 
         }
