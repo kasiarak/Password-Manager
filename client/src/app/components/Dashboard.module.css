@@ -279,4 +279,7 @@
         margin-left: auto;
         margin-right: auto;
     }
+    .addPasswordModal{
+        width: 90vw;
+    }
 }
