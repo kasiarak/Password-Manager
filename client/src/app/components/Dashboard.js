@@ -35,10 +35,36 @@ function Dashboard({ username }){
         else setPasswordAlertIsShowing(false);
     }
 
-    const filterHandle = (index) => {
+    const filterHandle = async (index) => {
         const newFilters = ['white', 'white', 'white'];
         newFilters[index] = filters[index] === 'white' ? 'var(--accent-color)' : 'white';
         setFilters(newFilters);
+        if(newFilters[0] === 'white' && newFilters[1] === 'white' && newFilters[2] === 'white'){
+            refreshDashboard();
+        }else{
+            let filter = '';
+            if(index === 0) filter = 'last_update'
+            else if(index === 1) filter = 'security_rank'
+            else filter = 'website'
+            try{
+                const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/filterPasswords/' + userId + '/' + filter);
+                const data = await response.json();
+                if(data.length === 0){
+                    setNoPasswordsFoundAlerstIsShown(true);
+                    let newPasswords = [];
+                    setPasswords(newPasswords); 
+                }else{
+                    setNoPasswordsFoundAlerstIsShown(false);
+                    let newPasswords = [];
+                    for(let i = 0; i < data.length; i++){
+                        newPasswords.push(<Password refreshDashboard={refreshDashboard} key={data[i].id} passwordId={data[i].id}></Password>)
+                    }
+                    setPasswords(newPasswords); 
+                }
+            }catch(error){
+                console.error(error);
+            }
+        }
     }
 
     useEffect(() => {

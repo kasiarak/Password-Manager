@@ -168,6 +168,20 @@ const search = async (req, res) => {
     res.end();
 }
 
+const getUserPasswordsWithFilter = async (req, res) => {
+    const userId = req.url.split('/')[2];
+    const filter = req.url.split('/')[3]; 
+    if(filter === 'website'){
+        const [passwords] = await pool.query(`SELECT * FROM passwords WHERE user_id = ? ORDER BY ${filter}`,[userId]);
+        res.write(JSON.stringify(passwords));
+        res.end();    
+    }else{
+        const [passwords] = await pool.query(`SELECT * FROM passwords WHERE user_id = ? ORDER BY ${filter} DESC`,[userId]);
+        res.write(JSON.stringify(passwords));
+        res.end();    
+    }
+}
+
 const notFoundHandler = (res) => {
     res.write(JSON.stringify({message: 'Route not found'}));
     res.end();
@@ -193,6 +207,8 @@ const server = createServer((req, res) =>{
             getDataPassword(req, res);
         }else if(req.url.match(/\/id\/([\w\W]+)/) && req.method === 'GET'){
             getUserId(req, res);
+        }else if(req.url.match(/\/filterPasswords\/([0-9]+)\/(last_update|security_rank|website)/) && req.method === 'GET'){
+            getUserPasswordsWithFilter(req, res);
         }else if(req.url.match(/\/passwords\/([0-9]+)/) && req.method === 'GET'){
             getUserPasswords(req, res);
         }else if(req.url.match(/\/delete\/([0-9]+)/) && req.method === 'DELETE'){
