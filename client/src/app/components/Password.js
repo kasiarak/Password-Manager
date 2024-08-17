@@ -187,6 +187,7 @@ function Password({ passwordId, refreshDashboard }){
             <button onClick={showEditModal}><img alt="edit" src="pencil-ui-svgrepo-com.svg"></img></button>
             <button onClick={showPassword}><img alt="show password" src={passwordIsShown ? "eye-off-svgrepo-com.svg" : "eye-svgrepo-com.svg"}></img></button>
             </div>
+            <div className={styles.passwordInfoContainer}>
             <div className={styles.passwordInfo}>
                 <h3>Website: {website}</h3>
                 <h3>Password: {passwordIsShown ? password : "••••••••••••••"}</h3>
@@ -198,6 +199,7 @@ function Password({ passwordId, refreshDashboard }){
                 {securityRank}
             </div>
             <h3 className={styles.lastUpdate}>Last<br></br>update<br></br>{lastUpdate}</h3>
+            </div>
         </div>
     );
 }
