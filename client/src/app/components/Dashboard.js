@@ -26,7 +26,7 @@ function Dashboard({ username }){
     }
     const handleNewEmail = (e) => {
         setNewEmail(e.target.value);
-        if(e.target.value.length > 22) setEmailAlertIsShowing(true);
+        if(e.target.value.length > 34) setEmailAlertIsShowing(true);
         else setEmailAlertIsShowing(false)
     }
     const handleNewPassword = (e) => {
@@ -172,7 +172,7 @@ function Dashboard({ username }){
                     <button className={styles.hideModalBtn} onClick={hideAddPasswordModal}>&#10799;</button>
             {websiteAlertIsShowing && <p className={styles.websiteAlert}>Maximum of 16 characters.</p>}
             <div className={styles.inputContainer}><input id="website" value={newWebsite} onChange={handleNewWebsite} placeholder='Website'></input></div>
-            {emailAlertIsShowing && <p className={styles.emailAlert}>Maximum of 22 characters.</p>}
+            {emailAlertIsShowing && <p className={styles.emailAlert}>Maximum of 34 characters.</p>}
             <div className={styles.inputContainer}><input id="email" value={newEmail} onChange={handleNewEmail} placeholder='Email'></input></div>
             {passwordAlertIsShowing && <p className={styles.passwordAlert}>Maximum of 22 characters.</p>}
             <div className={styles.inputContainer}><input id="password" value={newPassword} onChange={handleNewPassword} placeholder='Password'></input></div>
