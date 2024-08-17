@@ -14,14 +14,29 @@ function Password({ passwordId, refreshDashboard }){
     const [isEditModalVisible, setIsEditModalVisible] = useState(false); 
     const [changedWebsite, setChangedWebsite] = useState(website); 
     const [changedEmail, setChangedEmail] = useState(email); 
-    const [changedPassword, setChangedPassword] = useState(password); 
+    const [changedPassword, setChangedPassword] = useState(password);
+    const [websiteAlertIsShowing, setWebsiteAlertIsShowing] = useState(false);
+    const [emailAlertIsShowing, setEmailAlertIsShowing] = useState(false);
+    const [passwordAlertIsShowing, setPasswordAlertIsShowing] = useState(false); 
 
     useEffect(() => setChangedWebsite(website), [website]);
-    const handleChangedWebsite = (e) => {setChangedWebsite(e.target.value)}
+    const handleChangedWebsite = (e) => {
+        setChangedWebsite(e.target.value);
+        if(e.target.value.length > 16) setWebsiteAlertIsShowing(true);
+        else setWebsiteAlertIsShowing(false);
+    }
     useEffect(() => setChangedEmail(email), [email]);
-    const handleChangedEmail = (e) => {setChangedEmail(e.target.value)}
+    const handleChangedEmail = (e) => {
+        setChangedEmail(e.target.value);
+        if(e.target.value.length > 34) setEmailAlertIsShowing(true);
+        else setEmailAlertIsShowing(false)
+    }
     useEffect(() => setChangedPassword(password), [password]);
-    const handleChangedPassword = (e) => {setChangedPassword(e.target.value)}
+    const handleChangedPassword = (e) => {
+        setChangedPassword(e.target.value);
+        if(e.target.value.length > 22) setPasswordAlertIsShowing(true);
+        else setPasswordAlertIsShowing(false);
+    }
 
     useEffect(() => refreshView,[]);
 
@@ -155,11 +170,14 @@ function Password({ passwordId, refreshDashboard }){
         setChangedPassword(password);
     }
 
-    function getEditButtonClassName(){
-        if(website !== changedWebsite || email !== changedEmail || password !== changedPassword){
-            return styles.editBtn
-        }else{
-            return styles.disabledEditBtn
+    function getEditButtonClassName() {
+        const isAnyAlertShowing = websiteAlertIsShowing || emailAlertIsShowing || passwordAlertIsShowing;
+        const isNothingChanged = website === changedWebsite && email === changedEmail && password === changedPassword;
+    
+        if (isAnyAlertShowing || isNothingChanged) {
+            return styles.disabledEditBtn;
+        } else {
+            return styles.editBtn;
         }
     }
 
@@ -176,10 +194,13 @@ function Password({ passwordId, refreshDashboard }){
                 <div className={styles.editModal}>
                     <button className={styles.hideModalBtn} onClick={hideEditModal}>&#10799;</button>
                     <h3>Make changes</h3>
-            <div className={styles.inputContainer}><input id="website" value={changedWebsite} onChange={handleChangedWebsite} placeholder='Website'></input></div>
-            <div className={styles.inputContainer}><input id="email" value={changedEmail} onChange={handleChangedEmail} placeholder='Email'></input></div>
-            <div className={styles.inputContainer}><input id="password" value={changedPassword} onChange={handleChangedPassword} placeholder='Password'></input></div>
-            <button className={`${getEditButtonClassName()} ${poppins.className}`} onClick={updatePassword}>Update</button>
+                    {websiteAlertIsShowing && <p className={styles.websiteAlert}>Maximum of 16 characters.</p>}
+                    <div className={styles.inputContainer}><input id="website" value={changedWebsite} onChange={handleChangedWebsite} placeholder='Website'></input></div>
+                    {emailAlertIsShowing && <p className={styles.emailAlert}>Maximum of 34 characters.</p>}
+                    <div className={styles.inputContainer}><input id="email" value={changedEmail} onChange={handleChangedEmail} placeholder='Email'></input></div>
+                    {passwordAlertIsShowing && <p className={styles.passwordAlert}>Maximum of 22 characters.</p>}
+                    <div className={styles.inputContainer}><input id="password" value={changedPassword} onChange={handleChangedPassword} placeholder='Password'></input></div>
+                    <button className={`${getEditButtonClassName()} ${poppins.className}`} onClick={updatePassword}>Update</button>
                 </div>
             </div>}
             <div className={styles.buttons}>
