@@ -259,7 +259,21 @@
     font-size: 0.75rem;
     position: absolute;
     top: 184px;
-}  
+}
+.inputContainer input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+    -webkit-text-fill-color: #333;
+    height: 20px; 
+    margin-top: 10px;
+    width: 94%;
+}
+  .inputContainer input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+    -webkit-text-fill-color: #333;
+    height: 20px; 
+    margin-top: 10px;
+    width: 94%;
+}
 @media screen and (max-width: 900px){
     .dashboard{
         width: 320px;
@@ -281,5 +295,11 @@
     }
     .addPasswordModal{
         width: 90vw;
+    }
+    .inputContainer input:-webkit-autofill {
+        width: 90%;
+    }
+      .inputContainer input:-webkit-autofill:focus {
+        width: 90%;
     }
 }
