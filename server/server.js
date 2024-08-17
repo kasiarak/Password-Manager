@@ -160,6 +160,14 @@ const addNewPassword = async (req, res) => {
     });
 }
 
+const search = async (req, res) => {
+    const userId = req.url.split('/')[2];
+    const search = req.url.split('/')[3];
+    const [passwords] = await pool.query('SELECT * FROM passwords WHERE user_id = ? AND (website LIKE ? OR password LIKE ? OR email LIKE ?)', [userId, `%${search}%`, `%${search}%`, `%${search}%`]);
+    res.write(JSON.stringify(passwords));
+    res.end();
+}
+
 const notFoundHandler = (res) => {
     res.write(JSON.stringify({message: 'Route not found'}));
     res.end();
@@ -183,7 +191,7 @@ const server = createServer((req, res) =>{
             login(req,res);
         }else if(req.url.match(/\/password\/([0-9]+)/) && req.method === 'GET'){
             getDataPassword(req, res);
-        }else if(req.url.match(/\/id\/([A-Za-z0-9_\-]+)/) && req.method === 'GET'){
+        }else if(req.url.match(/\/id\/([\w\W]+)/) && req.method === 'GET'){
             getUserId(req, res);
         }else if(req.url.match(/\/passwords\/([0-9]+)/) && req.method === 'GET'){
             getUserPasswords(req, res);
@@ -193,6 +201,8 @@ const server = createServer((req, res) =>{
             updatePassword(req,res); 
         }else if(req.url === '/addPassword' && req.method === 'POST'){
             addNewPassword(req,res);
+        }else if(req.url.match(/\/search\/(\d+)\/(.+)/) && req.method === 'GET'){
+            search(req,res);
         }else{
             notFoundHandler(res); 
         }

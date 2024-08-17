@@ -68,7 +68,10 @@ function Dashboard({ username }){
             setSavedPasswords(data.length); 
             if(data.length === 0){
                 setNoPasswordsFoundAlerstIsShown(true);
+                let newPasswords = [];
+                setPasswords(newPasswords); 
             }else{
+                setNoPasswordsFoundAlerstIsShown(false);
                 let newPasswords = [];
                 for(let i = 0; i < data.length; i++){
                     newPasswords.push(<Password refreshDashboard={refreshDashboard} key={data[i].id} passwordId={data[i].id}></Password>)
@@ -137,6 +140,31 @@ function Dashboard({ username }){
         setNewPassword('')
     }
 
+    async function search(e){
+        if(e.target.value===''){
+            refreshDashboard();
+        }else{
+            try{
+                const response = await fetch(process.env.NEXT_PUBLIC_API_URL + '/search/' + userId + '/' + e.target.value);
+                const data = await response.json();
+                if(data.length === 0){
+                    setNoPasswordsFoundAlerstIsShown(true);
+                    let newPasswords = [];
+                    setPasswords(newPasswords); 
+                }else{
+                    setNoPasswordsFoundAlerstIsShown(false);
+                    let newPasswords = [];
+                    for(let i = 0; i < data.length; i++){
+                        newPasswords.push(<Password refreshDashboard={refreshDashboard} key={data[i].id} passwordId={data[i].id}></Password>)
+                    }
+                    setPasswords(newPasswords); 
+                }
+            }catch(error){
+                console.error(error);
+            }
+        }
+    }
+
     return(
         <div className={styles.dashboard}>
             {isAddPasswordModalVisible && <div className={styles.modalBackground}>
@@ -172,7 +200,7 @@ function Dashboard({ username }){
             <div className={styles.passwords}>
             <div className={styles.searchEngine}>
                     <img alt="search" src="search-svgrepo-com.svg"/>
-                    <input id="search_engine" className={poppins.className} placeholder="Search..."/>
+                    <input onChange={search} id="search_engine" className={poppins.className} placeholder="Search..."/>
             </div>
             {noPasswordsFoundAlertIsShown && <p className={styles.noPasswordsFoundAlert}>No passwords found</p>}
             {passwords}
