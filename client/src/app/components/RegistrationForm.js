@@ -58,22 +58,22 @@ function RegistrationForm({ setIsUserRegistered, setIsUserLoggedIn}){
         <h2>Registration</h2>
         <div className={styles.registrationInputs}>
             <img alt="username" src='person-svgrepo-com.svg'/>
-            <input id="username" value={username} onChange={handleUsername} onKeyDown={handleKeyDown} className={poppins.className} placeholder='Username'></input>
+            <input id="username" autoComplete='username' value={username} onChange={handleUsername} onKeyDown={handleKeyDown} className={poppins.className} placeholder='Username'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>
             <img alt="email" id={styles.emailIcon} src='email-svgrepo-com.svg'/>
-            <input id="email" value={email} onChange={handleEmail} onKeyDown={handleKeyDown} type="email" className={poppins.className} placeholder='Email'></input>
+            <input id="email" autoComplete='email' value={email} onChange={handleEmail} onKeyDown={handleKeyDown} type="email" className={poppins.className} placeholder='Email'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>
             <img alt="password" src='lock-svgrepo-com.svg'/>
-            <input id="password" value={password} onChange={handlePassword} onKeyDown={handleKeyDown} type="password" className={poppins.className} placeholder='Password'></input>
+            <input id="password" autoComplete='current-password' value={password} onChange={handlePassword} onKeyDown={handleKeyDown} type="password" className={poppins.className} placeholder='Password'></input>
         </div>
         <hr></hr>
         <div className={styles.registrationInputs}>
             <img alt="password" src='key-svgrepo-com.svg'/>
-            <input id="confirmed_password" value={confirmedPassword} onChange={handleConfirmedPassword} onKeyDown={handleKeyDown} type="password" className={poppins.className} placeholder='Confirm Password'></input>
+            <input id="confirmed_password" autoComplete='current-password' value={confirmedPassword} onChange={handleConfirmedPassword} onKeyDown={handleKeyDown} type="password" className={poppins.className} placeholder='Confirm Password'></input>
         </div>
         <hr></hr>
         <div className={styles.buttons}>

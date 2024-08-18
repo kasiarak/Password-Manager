@@ -195,11 +195,11 @@ function Password({ passwordId, refreshDashboard }){
                     <button className={styles.hideModalBtn} onClick={hideEditModal}>&#10799;</button>
                     <h3>Make changes</h3>
                     {websiteAlertIsShowing && <p className={styles.websiteAlert}>Maximum of 16 characters.</p>}
-                    <div className={styles.inputContainer}><input id="website" value={changedWebsite} onChange={handleChangedWebsite} placeholder='Website'></input></div>
+                    <div className={styles.inputContainer}><input id="website" autoComplete='website' value={changedWebsite} onChange={handleChangedWebsite} placeholder='Website'></input></div>
                     {emailAlertIsShowing && <p className={styles.emailAlert}>Maximum of 34 characters.</p>}
-                    <div className={styles.inputContainer}><input id="email" value={changedEmail} onChange={handleChangedEmail} placeholder='Email'></input></div>
+                    <div className={styles.inputContainer}><input id="email" autoComplete='email' value={changedEmail} onChange={handleChangedEmail} placeholder='Email'></input></div>
                     {passwordAlertIsShowing && <p className={styles.passwordAlert}>Maximum of 22 characters.</p>}
-                    <div className={styles.inputContainer}><input id="password" value={changedPassword} onChange={handleChangedPassword} placeholder='Password'></input></div>
+                    <div className={styles.inputContainer}><input id="password" autoComplete='current-password' value={changedPassword} onChange={handleChangedPassword} placeholder='Password'></input></div>
                     <button className={`${getEditButtonClassName()} ${poppins.className}`} onClick={updatePassword}>Update</button>
                 </div>
             </div>}
