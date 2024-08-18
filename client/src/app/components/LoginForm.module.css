@@ -45,7 +45,7 @@
 }
 .buttons button:hover{
     background-color: var(--accent-color);
-    color: var(--main-color); 
+    color: white; 
     transition: 0.3s;
     border: 1px solid var(--accent-color);
 }
@@ -64,10 +64,10 @@
     justify-content: center;
 }
 .loginInputs input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 50px white inset;
-    -webkit-text-fill-color: #333;
+    -webkit-box-shadow: 0 0 0 50px var(--main-color) inset;
+    -webkit-text-fill-color: var(--secondary-color);
 }
 .loginInputs input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 50px white inset;
-    -webkit-text-fill-color: #333;
+    -webkit-box-shadow: 0 0 0 50px var(--main-color) inset;
+    -webkit-text-fill-color: var(--secondary-color);
 }

@@ -1,7 +1,7 @@
 .logOutBtn{
     position: absolute;
     top: -5px;
-    right: 15px;
+    right: 75px;
     font-size: 1.25rem;
 }
 .logOutBtn:hover{
@@ -78,6 +78,38 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.switchModeBtn{
+    width: 50px;
+    height: 25px;
+    border: 3px solid var(--secondary-color);
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.lightModeSwitch{
+    transform: translateX(0%);
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    height: 19px;
+    width: 19px;
+    margin-left: 3px;
+    transition: 0.3s;
+    margin-top: -0.25px;
+}
+.darkModeSwitch{
+    transform: translateX(0%);
+    border-radius: 50%;
+    background-color: var(--secondary-color);
+    height: 19px;
+    width: 19px;
+    margin-left: 28px;
+    transition: 0.3s;
+    margin-top: -0.25px;
 }
 @media screen and (max-width: 600px){
     .modal{

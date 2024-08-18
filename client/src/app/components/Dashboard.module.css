@@ -3,7 +3,7 @@
     height: 490px;
     border: 0.2px solid lightgray;
     border-radius: 15px;
-    box-shadow: 0 0 15px gray;
+    box-shadow: 0 0 15px rgb(72, 72, 72);
     margin-left: auto;
     margin-right: auto;
 }
@@ -16,6 +16,9 @@
     justify-content: center;
     align-items: center;
     border-radius: 15px;
+}
+.key img{
+    filter: none;
 }
 .dashboardHeader{
     display: flex;
@@ -50,11 +53,12 @@
     margin-top: 10px;
     border: 0.2px solid lightgray;
     border-radius: 15px;
-    background-color: white;
+    background-color: var(--main-color);
     cursor: pointer;
     height: 50px;
     padding-left: 5px;
     padding-right: 5px;
+    color: var(--secondary-color);
 }
 .container button:hover{
     background-color: var(--accent-color);
@@ -84,8 +88,6 @@
 .dropdownContent{
   display: none;
   position: absolute;
-  background-color: white;
-  box-shadow: 0px 16px 0px white;
   z-index: 1;
   width: 150px;
   border: 0.2px solid lightgray;
@@ -260,15 +262,15 @@
     top: 184px;
 }
 .inputContainer input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 50px white inset;
-    -webkit-text-fill-color: #333;
+    -webkit-box-shadow: 0 0 0 50px var(--main-color) inset;
+    -webkit-text-fill-color: var(--secondary-color);
     height: 20px; 
     margin-top: 10px;
     width: 94%;
 }
   .inputContainer input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 50px white inset;
-    -webkit-text-fill-color: #333;
+    -webkit-box-shadow: 0 0 0 50px var(--main-color) inset;
+    -webkit-text-fill-color: var(--secondary-color);
     height: 20px; 
     margin-top: 10px;
     width: 94%;

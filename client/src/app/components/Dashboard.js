@@ -7,7 +7,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['500'],  });
 
 function Dashboard({ username }){
     const [savedPasswords, setSavedPasswords] = useState(0);
-    const [filters, setFilters] = useState(['white', 'white', 'white']);
+    const [filters, setFilters] = useState(['var(--main-color)', 'var(--main-color)', 'var(--main-color)']);
     const [noPasswordsFoundAlertIsShown, setNoPasswordsFoundAlerstIsShown] = useState(false); 
     const [userId, setUserId] = useState(0);
     const [passwords, setPasswords] = useState([]); 
@@ -36,10 +36,10 @@ function Dashboard({ username }){
     }
 
     const filterHandle = async (index) => {
-        const newFilters = ['white', 'white', 'white'];
-        newFilters[index] = filters[index] === 'white' ? 'var(--accent-color)' : 'white';
+        const newFilters = ['var(--main-color)', 'var(--main-color)', 'var(--main-color)'];
+        newFilters[index] = filters[index] === 'var(--main-color)' ? 'var(--accent-color)' : 'var(--main-color)';
         setFilters(newFilters);
-        if(newFilters[0] === 'white' && newFilters[1] === 'white' && newFilters[2] === 'white'){
+        if(newFilters[0] === 'var(--main-color)' && newFilters[1] === 'var(--main-color)' && newFilters[2] === 'var(--main-color)'){
             refreshDashboard();
         }else{
             let filter = '';
@@ -214,9 +214,9 @@ function Dashboard({ username }){
                         <div className={styles.dropdown}>
                         <div className={`${styles.filters} ${poppins.className}`}><p>Filters</p><img src='settings-setup-svgrepo-com.svg'></img></div>
                         <div className={styles.dropdownContent}>
-                            <div style={{backgroundColor: filters[0], color: filters[0]==='white' ? 'var(--secondary-color)' : 'white'}} onClick={() => filterHandle(0)} className={styles.filter}>Sort by Date</div>
-                            <div style={{backgroundColor: filters[1], color: filters[1]==='white' ? 'var(--secondary-color)' : 'white'}} onClick={() => filterHandle(1)} className={styles.filter}>Sort by Security Rank</div>
-                            <div style={{backgroundColor: filters[2], color: filters[2]==='white' ? 'var(--secondary-color)' : 'white'}} onClick={() => filterHandle(2)} className={styles.filter}>Sort Alphabetically</div>
+                            <div style={{backgroundColor: filters[0], color: filters[0]==='var(--main-color)' ? 'var(--secondary-color)' : 'white'}} onClick={() => filterHandle(0)} className={styles.filter}>Sort by Date</div>
+                            <div style={{backgroundColor: filters[1], color: filters[1]==='var(--main-color)' ? 'var(--secondary-color)' : 'white'}} onClick={() => filterHandle(1)} className={styles.filter}>Sort by Security Rank</div>
+                            <div style={{backgroundColor: filters[2], color: filters[2]==='var(--main-color)' ? 'var(--secondary-color)' : 'white'}} onClick={() => filterHandle(2)} className={styles.filter}>Sort Alphabetically</div>
                         </div>
                         </div>
                     </div>

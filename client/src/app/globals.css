@@ -1,19 +1,34 @@
 :root {
-  --main-color: rgb(255, 255, 255); 
+  --main-color: #ffffff; 
   --accent-color: rgb(106, 5, 106);
-  --secondary-color: black; 
+  --secondary-color: #000000; 
+  --scrollbar-color: #c0c0c0 #f0f0f0;
+  --img-filter: none;
 }
 html{
   max-width: 100%;
   overflow-x: hidden;
   scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-color) 
 }
 body{
   background-color: var(--main-color);
   color: var(--secondary-color);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 h1{
   text-align: center;
   font-size: 3rem;
   margin-top: 50px;
+}
+input{
+  background-color: var(--main-color);
+  color: var(--secondary-color);
+}
+button{
+  color: var(--secondary-color)
+}
+img{
+  filter: invert(1) brightness(2);
+  filter: var(--img-filter);
 }
