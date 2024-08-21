@@ -66,7 +66,7 @@ function LoginForm({ setIsUserRegistered, setIsUserLoggedIn}){
             <div className={styles.buttons}>
                 <button onClick={login} className={poppins.className} >Login</button>
                 <p className={styles.message}>{message}</p>
-                <h3>Don't have an account?</h3>
+                <h3>Don&apos;t have an account?</h3>
                 <button onClick={() => setIsUserRegistered(false)} className={poppins.className} >Sing up</button>
             </div>
         </div>
