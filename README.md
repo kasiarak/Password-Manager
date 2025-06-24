@@ -36,7 +36,3 @@
 </div>
 
 ###
-
-<div align="center">
-  <img height="250" src="https://tinypic.host/images/2024/08/19/Zrzut-ekranu-2024-08-19-030505.png"  />
-</div>
